@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body{
+	font-family: 'Open Sans', sans-serif;
+	background: #A9E5D9;
+}
+/*custom scroll bar*/
+body::-webkit-scrollbar{
+	width: 12px !important;
+}
+body::-webkit-scrollbar-track {
+    	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+body::-webkit-scrollbar-thumb{
+	background: linear-gradient(#02CFC8,#e5f1f3) !important;
+}
+/*end custom scroll bar*/
+.bg-custom{
+	background: #02CFC8 !important;
+	min-height: 65px;
+}
+/*CSS NAVBAR*/
+nav{
+	    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.font-weight-bold {
+    font-weight: 650!important;
+}
+
+.user{
+	margin-bottom: 0px !important;
+}
+.dropdown-menu{
+	left: 25% !important;
+}
+/*END CSS NAVBAR*/
+
+/*CSS SOAL HEAD*/
+.d-block{
+	min-height: 110vh !important;
+}
+.soal-head{
+	margin-top: 5%;
+	background: #fff;
+	padding: 17px;
+	font-weight: bold;
+	font-size: 17px;
+	box-shadow: inset 0 0px 5px 0 rgba(0,0,0,0), 0 0px 0px 0 rgba(0,0,0,0);
+}
+.soal-no {
+    background: #A9E5D9;
+    color: #000;
+    font-weight: bold;
+    text-shadow: 3px 0px 3px rgb(255, 251, 251);
+}
+.waktu-mundur{
+	background: #02CFC8;
+	color: #fff;
+	text-shadow: 0 0 3px rgba(0,0,0,1);
+}
+/*END CSS SOAL HEAD*/
+
+.clear {
+    clear : both;
+}
+p {
+    text-align : justify
+}
+
+p.warn {
+    color : #333; 
+    padding : 15px; 
+    font-size : 13px; 
+    line-height : 1.7em;
+}
+
+#soal{
+    background : #fff
+}
+#nomor {
+    float : left;
+}
+#nomor span {
+    background : #A9E5D9; 
+    color:#fff; 
+    padding : 5px 0; 
+    width : 35px; 
+    display : inline-block; 
+    text-align : center;
+}
+#waktu {
+    float : right; 
+    background : #A9E5D9; 
+    color : #fff;
+}
+#waktu span {
+    padding : 5px 20px; 
+    display : inline-block
+}
+
+
+#mata-pelajaran {
+    background : #EAEAEA; 
+    font-weight : bold; 
+    font-size : 18px; 
+    padding : 10px 15px;
+}
+
+#soal { 
+    margin-bottom : 20px;
+}
+#soal-body {
+    padding : 20px;
+}
+.soal { 
+    border : solid 1px #ccc; 
+    padding : 20px; 
+    display : none;
+}
+.soal.active {
+    display : block;
+}
+.options-group {
+    margin-top : 40px;
+}
+.options {
+    margin : 20px 0;
+}
+.options p {
+    position : relative; 
+    left : 35px; 
+    max-width : 90%
+}
+#soal-foot {
+    padding : 10px 20px; 
+    border-top : solid 1px #ccc; 
+}
+#soal-foot .btn {
+    font-size : 12px;
+}
+
+#summary .no {
+    float : left; 
+    font-size : 16px; 
+    font-weight : bold; 
+    text-align: center; 
+    border : solid 10px #e5f1f3; 
+    position : relative; 
+    cursor : pointer
+}
+#summary p {
+    margin : 0; 
+    border : solid 2px #000; 
+    width : 40px;
+    padding : 7px; 
+    text-align : center;
+}
+#summary span { 
+    position : absolute; 
+    top : -6px; 
+    right : -7px; 
+    border : solid 2px #000; 
+    border-radius : 90px; 
+    width : 20px; 
+    height : 20px; 
+    font-size : 12px; 
+    background : #fff;
+}
+#summary .no.active,
+#summary .no.done.active p,
+#summary .no.ragu-ragu.active.done p {
+    background: #699BCE;
+    color: #000;
+}
+#summary .no.done p { 
+    background : #444; 
+    color : #fff;
+}
+#summary .no.ragu-ragu.done p,
+#summary .no.ragu-ragu {
+    color : #fff; 
+    background : #f0ad4e
+}
+#summary .no.ragu-ragu span {
+    border-color : #f0ad4e; 
+    color  :#f0ad4e 
+}
+#summary-button {
+    position : fixed; 
+    right : 299px; 
+    top: 139px;
+}
+
+.tombol-daftar-soal{
+    right: 0 !important;
+    top: 200px;
+    position: fixed;
+    transition: right 2s;
+    z-index: 1021;
+}
+.tombol-daftar-soal-2{
+    right: 300px;
+    top: 200px;
+    position: fixed;
+    transition: right 2s;
+    z-index: 1021;
+}
+.daftar-soal{
+    right: -300px;
+    top: 80px;
+    width: 300px;
+    height: 350px;
+    background: #e5f1f3;
+    border :solid 20px #ADA7A7;
+    position: fixed;
+    transition: right 2s;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    overflow-y: scroll;
+    z-index: 1021;
+}
+.daftar-soal-2{
+    right: 0px;
+    top: 80px;
+    width: 300px;
+    height: 350px;
+    background: #e5f1f3;
+    border :solid 20px #ADA7A7;
+    position: fixed;
+    transition: right 2s;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    overflow-y: scroll;
+    z-index: 1021;
+}
+    
+.nomor {
+    display : none;
+}
+
+label.coolbox {  
+    border: solid 1px #000;  
+    margin:2px;
+    display:inline-block;
+    width:30px;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    vertical-align:middle;
+    font-weight:bold;
+    font-size:20px;
+    border-radius: 20px;    
+}
+label.coolbox input {
+    display:none;
+}
+label.coolbox span {
+    color:#000;
+}
+label.coolbox input:checked + span {
+    color:red;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+.modal-title {
+    margin: 0;
+    line-height: 1.42857143;
+}
+.options p{ 
+    margin-top: -27px;
+}

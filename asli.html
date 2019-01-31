@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+<html class="gr__mtsnmodelmks_16mb_com" lang="en"><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Aplikasi Ujian</title>
+
+        <!-- Bootstrap -->
+        <link href="http://ujian.nguprek.com/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://ujian.nguprek.com/asset/unbk/style.css" rel="stylesheet">    
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="http://ujian.nguprek.com/asset/unbk/jquery.js"></script>   
+        <script src="http://ujian.nguprek.com/bootstrap/js/bootstrap.min.js"></script>  
+        <script src="http://ujian.nguprek.com/asset/unbk/script.js"></script>
+    <!--<script src="http://ujian.nguprek.com/js/basic.js"></script>-->
+
+        <style type="text/css">
+            .options p{ 
+                margin-top: -27px;
+            }
+        </style>
+        <script>
+            var base_url = "http://ujian.nguprek.com/";
+            var Timer;
+            var TotalSeconds;
+
+
+            function CreateTimer(TimerID, Time) {
+                Timer = document.getElementById(TimerID);
+                TotalSeconds = Time;
+
+                UpdateTimer()
+                window.setTimeout("Tick()", 1000);
+            }
+
+            function Tick() {
+                if (TotalSeconds <= 0) {
+                    alert("Time's up!")
+                    return;
+                }
+
+                TotalSeconds -= 1;
+                UpdateTimer()
+                window.setTimeout("Tick()", 1000);
+            }
+
+            function UpdateTimer() {
+                var Seconds = TotalSeconds;
+
+                var Days = Math.floor(Seconds / 86400);
+                Seconds -= Days * 86400;
+
+                var Hours = Math.floor(Seconds / 3600);
+                Seconds -= Hours * (3600);
+
+                var Minutes = Math.floor(Seconds / 60);
+                Seconds -= Minutes * (60);
+
+
+                var TimeStr = ((Days > 0) ? Days + " days " : "") + LeadingZero(Hours) + ":" + LeadingZero(Minutes) + ":" + LeadingZero(Seconds)
+
+
+                Timer.innerHTML = TimeStr;
+            }
+
+
+            function LeadingZero(Time) {
+
+                return (Time < 10) ? "0" + Time : +Time;
+
+            }
+
+            //var myCountdown1 = new Countdown({time:831, rangeHi:"hour", rangeLo:"second"});
+            setTimeout(submitform, '831000');
+
+            function submitform() {
+                alert('Time Over');
+                window.location = "http://ujian.nguprek.com/index.php/quiz/submit_quiz";
+            }
+
+            function tutup() {
+                $('#yakin-modal').hide();
+            }
+            
+            function tutupRagu(){
+                $('#ragu-modal').hide();
+            }
+
+            function selesai() {
+                if ($('#yakin').is(":checked")) {
+                    window.location = "../submit_quiz/";
+                } else {
+                    alert('Silahkan Pilih Centang Terlebih Dahulu');
+                }
+            }
+        </script>
+        <style type="text/css">
+            label.coolbox {  
+                border: solid 1px #000;  
+                margin:2px;
+                display:inline-block;
+                width:30px;
+                height:30px;
+                line-height:30px;
+                text-align:center;
+                vertical-align:middle;
+                font-weight:bold;
+                font-size:20px;
+                border-radius: 20px;    
+            }
+            label.coolbox input {display:none;}
+            label.coolbox span {color:#000;}
+            label.coolbox input:checked + span {color:red;}
+        </style>
+    </head>
+    <body>
+        <style>
+            .MathJax_Display {display : inline !important;}
+        </style>
+        <div id="header">
+            <div class="container">
+                <div class="row">   
+                    <div class="col-md-12">
+                        <div id="logo">
+                           <!-- <img src="http://ujian.nguprek.com/asset/unbk/logo.png"> -->
+                        </div>
+                        <div id="welcome">
+                            <div id="avatar">
+                                <img src="http://ujian.nguprek.com/asset/unbk/avatar.png">
+                            </div>
+                            <div id="selamat">
+                                <p>Selamat Datang</p>
+                                <p><b id="nama_siswa">Peserta Test</b></p>
+                                <p><a href="http://ujian.nguprek.com/index.php/user/logout">Logout</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div style="height:30px;"></div>
+            </div>
+        </div>
+        <div class="modal" id="ragu-modal">
+            <div class="modal-dialog" role="document" style="margin: 120px auto">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="tutupRagu()"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Konfirmasi Test</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span style="font-size:50px; position: absolute; top: 10px;" class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> 
+                        <p style="padding-left : 70px">Anda masih ragu - ragu / belum mengisi terhadap beberapa jawaban. Silakan tinjau lagi jawaban anda.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger close-modal" data-dismiss="modal" style="width: 100%" onclick="tutupRagu()">Ya</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        <div class="modal" id="yakin-modal">
+            <div class="modal-dialog" role="document" style="margin: 120px auto; width:450px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="tutupRagu()"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Konfirmasi Test</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span style="font-size:50px; position: absolute; top: 10px;" class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> 
+                        <p style="padding-left : 70px">Anda masih memiliki waktu untuk mata uji ini <br><br> Apakah anda yakin ingin mengakhiri mata uji ini ?</p>
+
+                        <table style="width:100%">
+                            <tbody><tr>
+                                    <td style="text-align:right"><input id="yakin" type="checkbox"></td>
+                                    <td style="text-align:center; width: 350px;"><span class="red">CENTANG</span>, kemudian tekan tombol selesai. <br>Anda tidak akan bisa kembali ke soal<br>jika sudah menekan tombol selesai</td>
+                                </tr>
+                            </tbody></table>
+                    </div>
+                    <div class="modal-footer" style="text-align:center">
+                        <button type="button" id="selesai" class="btn btn-default" data-dismiss="modal" style="width:45%" onClick="selesai()">SELESAI</button>
+                        <button type="button" class="btn btn-danger close-modal" style="width:45%" onClick="tutup()">TIDAK</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="soal">
+                        <div id="soal-head">
+                            <div id="nomor">
+                                SOAL NO <span>1</span>
+                            </div>
+                            <div id="waktu">
+                                <span>Sisa Waktu</span>
+                                <span class="sisa" id="timer">
+                                    <script type="text/javascript">window.onload = CreateTimer("timer", 831);</script>
+                                </span> 
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div id="font-size">
+                            Ukuran font soal : <span class="a1">A</span><span class="a2">A</span><span class="a3">A</span>
+                        </div>
+                        <div id="soal-body">
+                            <form method="post" action="http://ujian.nguprek.com/index.php/quiz/submit_quiz/783" id="quiz_form" >
+                                <input type="hidden" name="rid" value="783" id="rid">
+                                <input type="hidden" name="noq" value="10" id="noq">
+                                <input type="hidden" name="individual_time"  id="individual_time" value="60,0,0,0,0,0,0,0,0,0" id="individual_time">
+                                
+                                                                    <div id="nomor-asli-1" class="soal nomor-asli-1 nomor-1 active">
+                                        <div class="nomor">1</div>  
+                                        <p>Router OSPF digunakan untuk routing dengan jaringan jumlah kecil. Khususnya untuk menghubungkan beberapa Autonomous System</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type0" value="1">
+                                                 <input type="hidden" name="qid[0]" value="5261" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[0][]"  id="answer_value0-0" class="option" value="15794" checked><span id="option-15794" >A</span></label>&nbsp;<p>Benar</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-1 span').html('A');
+                                                                        $('.no.no-1').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[0][]"  id="answer_value0-1" class="option" value="15793" ><span id="option-15793" >B</span></label>&nbsp;<p>Salah</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-2" class="soal nomor-asli-2 nomor-2 ">
+                                        <div class="nomor">2</div>  
+                                        <p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Throughput adalah istilah yang digunakan untuk menyebutkan ?</span></span></p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type1" value="1">
+                                                 <input type="hidden" name="qid[1]" value="5255" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-0" class="option" value="15764" ><span id="option-15764" >A</span></label>&nbsp;<p style="list-style-type:none">​​​​​​​<span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Lebar jalur data</span></span></p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-1" class="option" value="15763" ><span id="option-15763" >B</span></label>&nbsp;<p style="list-style-type:none">​​​​​​​<span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Bandwith aktual </span></span></p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-2" class="option" value="15765" ><span id="option-15765" >C</span></label>&nbsp;<p><span style="font-size:11.0pt"><span style="font-family:&quot;Calibri&quot;,sans-serif">Standar kecepatan data</span></span></p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-3" class="option" value="15766" checked><span id="option-15766" >D</span></label>&nbsp;<p style="list-style-type:none">​​​​​​​<span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Jumlah paket data</span></span></p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-2 span').html('D');
+                                                                        $('.no.no-2').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-4" class="option" value="15767" ><span id="option-15767" >E</span></label>&nbsp;<p style="list-style-type:none">​​​​​​​<span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Volume arus data</span></span></p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-3" class="soal nomor-asli-3 nomor-3 ">
+                                        <div class="nomor">3</div>  
+                                        <p>&nbsp;</p>
+
+<p>Sebuah sistem dibangun dengan menggunakan enkripsi untuk setiap data yang dikirim dan diterima. Enkripsi digunakan untuk mengantisipasi perubahan data yang terjadi karena pihak ketiga yang tidak bertanggung jawab.&nbsp;</p>
+
+<p>Di atas adalah salah satu contoh untuk konsep atau aspek keamanan . . .&nbsp; .</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type2" value="1">
+                                                 <input type="hidden" name="qid[2]" value="5253" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-0" class="option" value="15757" checked><span id="option-15757" >A</span></label>&nbsp;<p>Authentication</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-3 span').html('A');
+                                                                        $('.no.no-3').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-1" class="option" value="15755" ><span id="option-15755" >B</span></label>&nbsp;<p>Availability</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-2" class="option" value="15756" ><span id="option-15756" >C</span></label>&nbsp;<p>Non-repudiation</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-3" class="option" value="15754" ><span id="option-15754" >D</span></label>&nbsp;<p>Confidentiality</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-4" class="option" value="15753" ><span id="option-15753" >E</span></label>&nbsp;<p>Integrity</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-4" class="soal nomor-asli-4 nomor-4 ">
+                                        <div class="nomor">4</div>  
+                                        <p>[Kasus]</p>
+
+<p>Administrator A sedang membangun sebuah sistem untuk keperluan internal. Untuk melindungi sistemnya dari kemungkinan serangan dan gangguan&nbsp;keamanan sang Administrator membatasi akses sistem dari database dari luar. Ia mengatur firewall yang memfilter akses dari luar jaringan ke sistem dalam.&nbsp;</p>
+
+<p>Dalam kasus di atas, konsep atau aspek keamanan apa yang coba diterapkan oleh administrator ?</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type3" value="1">
+                                                 <input type="hidden" name="qid[3]" value="5251" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-0" class="option" value="15744" ><span id="option-15744" >A</span></label>&nbsp;<p>Integrity</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-1" class="option" value="15747" checked><span id="option-15747" >B</span></label>&nbsp;<p>Authentication</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-4 span').html('B');
+                                                                        $('.no.no-4').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-2" class="option" value="15746" ><span id="option-15746" >C</span></label>&nbsp;<p>Non-repudiation</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-3" class="option" value="15745" ><span id="option-15745" >D</span></label>&nbsp;<p>Availability</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-4" class="option" value="15743" ><span id="option-15743" >E</span></label>&nbsp;<p>Confidentiality</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-5" class="soal nomor-asli-5 nomor-5 ">
+                                        <div class="nomor">5</div>  
+                                        <p>Seorang administrator memasang perangkat lunak untuk mencatat semua aktovitas yang dilakukan di folder web mereka. Setiap user yang login, menambah, mengubah dan dan menghapus file akan dicatat di dalam log. Administrator tersebut juga memonitor dan mencatat semua lalu lintas jaringan di servernya.</p>
+
+<p>Upaya yang dilakukan administrator di atas adalah bagian dari . . .&nbsp;</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type4" value="1">
+                                                 <input type="hidden" name="qid[4]" value="5259" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-0" class="option" value="15784" checked><span id="option-15784" >A</span></label>&nbsp;<p>Monitoring&nbsp;</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-5 span').html('A');
+                                                                        $('.no.no-5').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-1" class="option" value="15783" ><span id="option-15783" >B</span></label>&nbsp;<p>Audit server</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-2" class="option" value="15787" ><span id="option-15787" >C</span></label>&nbsp;<p>Authorization</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-3" class="option" value="15786" ><span id="option-15786" >D</span></label>&nbsp;<p>Vulnerability Scanner</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-4" class="option" value="15785" ><span id="option-15785" >E</span></label>&nbsp;<p>Host Harddening</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-6" class="soal nomor-asli-6 nomor-6 ">
+                                        <div class="nomor">6</div>  
+                                        <p>Di bawah ini pernyataan yang benar untuk proses koneksi menggunakan VPN adalah . . .&nbsp;</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type5" value="1">
+                                                 <input type="hidden" name="qid[5]" value="5257" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-0" class="option" value="15777" ><span id="option-15777" >A</span></label>&nbsp;<p>VPN merupakan koneksi amam sehingga IP tidak bisa terlihat kecuali oleh server</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-1" class="option" value="15776" ><span id="option-15776" >B</span></label>&nbsp;<p>Tidak ada IP dalam konekso VPN, semuanya menggunakan MAC Address</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-2" class="option" value="15775" checked><span id="option-15775" >C</span></label>&nbsp;<p>VPN merupakan koneksi aman, jadi ip tidak terlihat</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-6 span').html('C');
+                                                                        $('.no.no-6').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-3" class="option" value="15773" ><span id="option-15773" >D</span></label>&nbsp;<p>IP pengguna yang akan terlihat adalah ip server vpn</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-4" class="option" value="15774" ><span id="option-15774" >E</span></label>&nbsp;<p>IP pengguna VPN akan menjadi anonymous</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-7" class="soal nomor-asli-7 nomor-7 ">
+                                        <div class="nomor">7</div>  
+                                        <p>A adalah seorang administrator jaringan, ia ditugaskan untuk menganankan router di sebuah perusahaan. Akhir-akhir ini jaringan yang ia kelola mengalami kendala, sebabnya adalah router yang terlalu banyak menerima paket data yang masuk. Ada beberapa komputer yang melakukan flooding paket data ke server. A berniat menggunakan firewall untuk mengatasinya.</p>
+
+<p>Chain apa yang harus digunakan oleh A ?</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type6" value="1">
+                                                 <input type="hidden" name="qid[6]" value="5263" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-0" class="option" value="15799" checked><span id="option-15799" >A</span></label>&nbsp;<p>FORWARD</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-7 span').html('A');
+                                                                        $('.no.no-7').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-1" class="option" value="15797" ><span id="option-15797" >B</span></label>&nbsp;<p>INPUT</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-2" class="option" value="15801" ><span id="option-15801" >C</span></label>&nbsp;<p>MASQUERADE</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-3" class="option" value="15798" ><span id="option-15798" >D</span></label>&nbsp;<p>OUTPUT</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-4" class="option" value="15800" ><span id="option-15800" >E</span></label>&nbsp;<p>DROP</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-8" class="soal nomor-asli-8 nomor-8 ">
+                                        <div class="nomor">8</div>  
+                                        <p>Sebuah perusahaan penyedia layanan media sosial memiliki lebih dari satu server. Mereka menempatkan sistem di beberapa server di beberapa tempat berbeda untuk antisipasi beberapa kemungkinan, seperti bencana, kerusuhan dan serangan jaringan keamanan yang bisa melumpuhkan server.&nbsp;</p>
+
+<p>Apa yang dilakukan perusahaan merupakan bagian dari konsep atau aspek keamanan ?</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type7" value="1">
+                                                 <input type="hidden" name="qid[7]" value="5256" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-0" class="option" value="15770" ><span id="option-15770" >A</span></label>&nbsp;<p>Integrity</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-1" class="option" value="15772" ><span id="option-15772" >B</span></label>&nbsp;<p>Authentication</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-2" class="option" value="15768" ><span id="option-15768" >C</span></label>&nbsp;<p>Availability</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-3" class="option" value="15769" ><span id="option-15769" >D</span></label>&nbsp;<p>Confidentiality</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-4" class="option" value="15771" checked><span id="option-15771" >E</span></label>&nbsp;<p>Non-repudiation</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-8 span').html('E');
+                                                                        $('.no.no-8').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-9" class="soal nomor-asli-9 nomor-9 ">
+                                        <div class="nomor">9</div>  
+                                        <p>Mode AP Bridge dalam pengaturan wireless mikrotik memiliki fungsi ?</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type8" value="1">
+                                                 <input type="hidden" name="qid[8]" value="5223" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[8][]"  id="answer_value8-0" class="option" value="15623" ><span id="option-15623" >A</span></label>&nbsp;<p>Membuat wireless mikrotik bekerja sebagai access personal</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[8][]"  id="answer_value8-1" class="option" value="15624" ><span id="option-15624" >B</span></label>&nbsp;<p>Membuat wireless mikrotik bekerja sebagai client</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[8][]"  id="answer_value8-2" class="option" value="15622" checked><span id="option-15622" >C</span></label>&nbsp;<p>Membuat wireless mikrotik bekerja sebagai bridge</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-9 span').html('C');
+                                                                        $('.no.no-9').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[8][]"  id="answer_value8-3" class="option" value="15621" ><span id="option-15621" >D</span></label>&nbsp;<p>Membuat wireless mikrotik bekerja sebagai access point</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-10" class="soal nomor-asli-10 nomor-10 ">
+                                        <div class="nomor">10</div> 
+                                        <p>Pengaturan Security Profile pada Mikrotik berfungsi sebagai ?</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type9" value="1">
+                                                 <input type="hidden" name="qid[9]" value="5226" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[9][]"  id="answer_value9-0" class="option" value="15634" checked><span id="option-15634" >A</span></label>&nbsp;<p>Konfigurasi SSID</p>
+                                                                                                                            <script type="text/javascript">
+                                                                    //alert('check');
+                                                                    $(document).ready(function () {
+                                                                        $('.no.no-10 span').html('A');
+                                                                        $('.no.no-10').addClass('done');
+                                                                    });
+                                                                </script>
+                                                                                                                        </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[9][]"  id="answer_value9-1" class="option" value="15635" ><span id="option-15635" >B</span></label>&nbsp;<p>Konfigurasi Password Admin</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[9][]"  id="answer_value9-2" class="option" value="15633" ><span id="option-15633" >C</span></label>&nbsp;<p>Konfigurasi Private Pre-Shared Key</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[9][]"  id="answer_value9-3" class="option" value="15636" ><span id="option-15636" >D</span></label>&nbsp;<p>Konfigurasi profil keamanan</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                        <div id="soal-foot">
+                            <table width="100%">
+                                <tbody><tr>
+                                        <td align="left"><button type="button" id="prev-soal" class="btn btn-default"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> SOAL SEBELUMNYA</button></td>
+                                        <td align="center"><button type="button" class="btn btn-warning ragu"><span class="glyphicon glyphicon-unchecked ragu-1 ragu-check" aria-hidden="true"></span> RAGU - RAGU</button></td>
+                                        <td align="right"><button type="button" id="next-soal" class="btn btn-primary">SOAL BERIKUTNYA <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+                                        <td align="right"><button style="display:none" type="button" data-toggle="modal" data-target="#myModal" id="last-soal" class="btn btn-primary">KUMPULKAN JAWABAN<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+                                    </tr>
+                                </tbody></table>
+                                <!-- <table width="100%">
+                                        <tbody><tr>
+                                                <td align="left"><button type="button" id="prev-soal" class="btn btn-default"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> SOAL SEBELUMNYA</button></td>
+                                                <td align="center"><button type="button" class="btn btn-warning ragu"><span class="glyphicon glyphicon-unchecked ragu-1 ragu-check" aria-hidden="true"></span> RAGU - RAGU</button></td>
+                                                <td align="right"><button type="button" id="next-soal" class="btn btn-primary" onClick="javascript:show_next_question();">SOAL BERIKUTNYA <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+                                                <td align="right"><button style="display:none" type="button" data-toggle="modal" data-target="#myModal" id="last-soal" class="btn btn-primary">KUMPULKAN JAWABAN<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+                                                <button class="btn btn-danger"  onClick="javascript:cancelmove();" style="margin-top:2px;" >Kirim Jawaban</button>
+                                        </tr>
+                                </tbody></table> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="right: 0px;" id="summary-button" class="">
+            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-menu-left" aria-hidden="true" style="position:relative; top:10px"></span> Daftar <br>Soal</button>
+        </div>
+
+        <div style="display: none;" id="summary">
+                <div class="no nomor-asli-1 no-1 active" id="qbtn1">
+                    <p>1</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('0');" id="qbtn0" ></div> -->
+                    <div class="no nomor-asli-2 no-2 " id="qbtn2">
+                    <p>2</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('1');" id="qbtn1" ></div> -->
+                    <div class="no nomor-asli-3 no-3 " id="qbtn3">
+                    <p>3</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('2');" id="qbtn2" ></div> -->
+                    <div class="no nomor-asli-4 no-4 " id="qbtn4">
+                    <p>4</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('3');" id="qbtn3" ></div> -->
+                    <div class="no nomor-asli-5 no-5 " id="qbtn5">
+                    <p>5</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('4');" id="qbtn4" ></div> -->
+                    <div class="no nomor-asli-6 no-6 " id="qbtn6">
+                    <p>6</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('5');" id="qbtn5" ></div> -->
+                    <div class="no nomor-asli-7 no-7 " id="qbtn7">
+                    <p>7</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('6');" id="qbtn6" ></div> -->
+                    <div class="no nomor-asli-8 no-8 " id="qbtn8">
+                    <p>8</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('7');" id="qbtn7" ></div> -->
+                    <div class="no nomor-asli-9 no-9 " id="qbtn9">
+                    <p>9</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('8');" id="qbtn8" ></div> -->
+                    <div class="no nomor-asli-10 no-10 " id="qbtn10">
+                    <p>10</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('9');" id="qbtn9" ></div> -->
+            </div>
+        <div id="jumlah_soal" style="display:none">10</div> 
+        <script>
+            $(document).ready(function () {
+                $('#finish').text('11 January 2016 17:00:00');
+                $('#last-soal').click(function () {
+                    if ($('.not-done').length > 0) {
+                        $('#ragu-modal').show();
+                    } else {
+                        if ($('.ragu-ragu').length > 0) {
+                            $('#ragu-modal').show();
+                        } else {
+                            $('#yakin-modal').show();
+                        }
+                    }
+                })
+            });
+        </script>
+        <script>
+            var ctime = 0;
+            var ind_time = new Array();
+                ind_time[0] =60;
+                    ind_time[1] =0;
+                    ind_time[2] =0;
+                    ind_time[3] =0;
+                    ind_time[4] =0;
+                    ind_time[5] =0;
+                    ind_time[6] =0;
+                    ind_time[7] =0;
+                    ind_time[8] =0;
+                    ind_time[9] =0;
+                noq = "10";
+            //show_question('0');
+
+
+            function increasectime() {
+
+                ctime += 1;
+
+            }
+            setInterval(increasectime, 1000);
+            setInterval(setIndividual_time, 30000);
+            setInterval(save_time, 10000);
+            
+
+
+        </script>           
+
+
+    </body><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>

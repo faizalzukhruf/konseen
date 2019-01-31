@@ -1,0 +1,574 @@
+﻿
+<!DOCTYPE html>
+<html class="gr__mtsnmodelmks_16mb_com" lang="en"><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Aplikasi Ujian</title>
+
+        <!-- Bootstrap -->
+        <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+        <link href="asset/css/style.css" rel="stylesheet">    
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="asset/js/jquery.js"></script>   
+        <script src="asset/js/bootstrap.min.js"></script>  
+        <script src="asset/js/script.js"></script>
+    <!--<script src="http://ujian.nguprek.com/js/basic.js"></script>-->
+
+        <style type="text/css">
+            .options p{ 
+                margin-top: -27px;
+            }
+        </style>
+        <script>
+            var base_url = "http://ujian.nguprek.com/";
+            var Timer;
+            var TotalSeconds;
+
+
+            function CreateTimer(TimerID, Time) {
+                Timer = document.getElementById(TimerID);
+                TotalSeconds = Time;
+
+                UpdateTimer()
+                window.setTimeout("Tick()", 1000);
+            }
+
+            function Tick() {
+                if (TotalSeconds <= 0) {
+                    alert("Time's up!")
+                    return;
+                }
+
+                TotalSeconds -= 1;
+                UpdateTimer()
+                window.setTimeout("Tick()", 1000);
+            }
+
+            function UpdateTimer() {
+                var Seconds = TotalSeconds;
+
+                var Days = Math.floor(Seconds / 86400);
+                Seconds -= Days * 86400;
+
+                var Hours = Math.floor(Seconds / 3600);
+                Seconds -= Hours * (3600);
+
+                var Minutes = Math.floor(Seconds / 60);
+                Seconds -= Minutes * (60);
+
+
+                var TimeStr = ((Days > 0) ? Days + " days " : "") + LeadingZero(Hours) + ":" + LeadingZero(Minutes) + ":" + LeadingZero(Seconds)
+
+
+                Timer.innerHTML = TimeStr;
+            }
+
+
+            function LeadingZero(Time) {
+
+                return (Time < 10) ? "0" + Time : +Time;
+
+            }
+
+            //var myCountdown1 = new Countdown({time:1152, rangeHi:"hour", rangeLo:"second"});
+            setTimeout(submitform, '1152000');
+
+            function submitform() {
+                alert('Time Over');
+                window.location = "http://ujian.nguprek.com/index.php/quiz/submit_quiz";
+            }
+
+            function tutup() {
+                $('#yakin-modal').hide();
+            }
+            
+            function tutupRagu(){
+                $('#ragu-modal').hide();
+            }
+
+            function selesai() {
+                if ($('#yakin').is(":checked")) {
+                    window.location = "../submit_quiz/";
+                } else {
+                    alert('Silahkan Pilih Centang Terlebih Dahulu');
+                }
+            }
+        </script>
+        <style type="text/css">
+            label.coolbox {  
+                border: solid 1px #000;  
+                margin:2px;
+                display:inline-block;
+                width:30px;
+                height:30px;
+                line-height:30px;
+                text-align:center;
+                vertical-align:middle;
+                font-weight:bold;
+                font-size:20px;
+                border-radius: 20px;    
+            }
+            label.coolbox input {display:none;}
+            label.coolbox span {color:#000;}
+            label.coolbox input:checked + span {color:red;}
+        </style>
+    </head>
+    <body>
+        <style>
+            .MathJax_Display {display : inline !important;}
+        </style>
+        <div id="header">
+            <div class="container">
+                <div class="row">   
+                    <div class="col-md-12">
+                        <div id="logo">
+                           <!-- <img src="http://ujian.nguprek.com/asset/unbk/logo.png"> -->
+                        </div>
+                        <div id="welcome">
+                            <div id="avatar">
+                                <img src="http://ujian.nguprek.com/asset/unbk/avatar.png">
+                            </div>
+                            <div id="selamat">
+                                <p>Selamat Datang</p>
+                                <p><b id="nama_siswa">Peserta Test</b></p>
+                                <p><a href="http://ujian.nguprek.com/index.php/user/logout">Logout</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div style="height:30px;"></div>
+            </div>
+        </div>
+        <div class="modal" id="ragu-modal">
+            <div class="modal-dialog" role="document" style="margin: 120px auto">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="tutupRagu()"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Konfirmasi Test</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span style="font-size:50px; position: absolute; top: 10px;" class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> 
+                        <p style="padding-left : 70px">Anda masih ragu - ragu / belum mengisi terhadap beberapa jawaban. Silakan tinjau lagi jawaban anda.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger close-modal" data-dismiss="modal" style="width: 100%" onclick="tutupRagu()">Ya</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        <div class="modal" id="yakin-modal">
+            <div class="modal-dialog" role="document" style="margin: 120px auto; width:450px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="tutupRagu()"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Konfirmasi Test</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span style="font-size:50px; position: absolute; top: 10px;" class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> 
+                        <p style="padding-left : 70px">Anda masih memiliki waktu untuk mata uji ini <br><br> Apakah anda yakin ingin mengakhiri mata uji ini ?</p>
+
+                        <table style="width:100%">
+                            <tbody><tr>
+                                    <td style="text-align:right"><input id="yakin" type="checkbox"></td>
+                                    <td style="text-align:center; width: 350px;"><span class="red">CENTANG</span>, kemudian tekan tombol selesai. <br>Anda tidak akan bisa kembali ke soal<br>jika sudah menekan tombol selesai</td>
+                                </tr>
+                            </tbody></table>
+                    </div>
+                    <div class="modal-footer" style="text-align:center">
+                        <button type="button" id="selesai" class="btn btn-default" data-dismiss="modal" style="width:45%" onClick="selesai()">SELESAI</button>
+                        <button type="button" class="btn btn-danger close-modal" style="width:45%" onClick="tutup()">TIDAK</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="soal">
+                        <div id="soal-head">
+                            <div id="nomor">
+                                SOAL<span>1</span>
+                            </div>
+                            <div id="waktu">
+                                <span>Sisa Waktu</span>
+                                <span class="sisa" id="timer">
+                                    <script type="text/javascript">window.onload = CreateTimer("timer", 1152);</script>
+                                </span> 
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div id="font-size">
+                            Matematika
+                        </div>
+                        <div id="soal-body">
+                            <form method="post" action="http://ujian.nguprek.com/index.php/quiz/submit_quiz/774" id="quiz_form" >
+                                <input type="hidden" name="rid" value="774" id="rid">
+                                <input type="hidden" name="noq" value="10" id="noq">
+                                <input type="hidden" name="individual_time"  id="individual_time" value="60,0,0,0,0,0,0,0,0,0" id="individual_time">
+                                
+                                                                    <div id="nomor-asli-1" class="soal nomor-asli-1 nomor-1 active">
+                                        <div class="nomor">1</div>  
+                                        <p>Di bawah ini yang termasuk sistem operasi jaringan adalah . . . .&nbsp;</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type0" value="1">
+                                                 <input type="hidden" name="qid[0]" value="5197" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[0][]"  id="answer_value0-0" class="option" value="15517" ><span id="option-15517" >A</span></label>&nbsp;<p>CentOS</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[0][]"  id="answer_value0-1" class="option" value="15520" ><span id="option-15520" >B</span></label>&nbsp;<p>Windows XP</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[0][]"  id="answer_value0-2" class="option" value="15519" ><span id="option-15519" >C</span></label>&nbsp;<p>Android Server</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[0][]"  id="answer_value0-3" class="option" value="15518" ><span id="option-15518" >D</span></label>&nbsp;<p>iOS</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-2" class="soal nomor-asli-2 nomor-2 ">
+                                        <div class="nomor">2</div>  
+                                        <p>Yang membuat SSH dengan Telnet berbeda adalah . . ..&nbsp;</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type1" value="1">
+                                                 <input type="hidden" name="qid[1]" value="5204" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-0" class="option" value="15548" ><span id="option-15548" >A</span></label>&nbsp;<p>Alamat IP</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-1" class="option" value="15545" ><span id="option-15545" >B</span></label>&nbsp;<p>Keamanan protokolnya</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-2" class="option" value="15547" ><span id="option-15547" >C</span></label>&nbsp;<p>Server yang digunakan&nbsp;</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[1][]"  id="answer_value1-3" class="option" value="15546" ><span id="option-15546" >D</span></label>&nbsp;<p>Aplikasinya berbeda</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-3" class="soal nomor-asli-3 nomor-3 ">
+                                        <div class="nomor">3</div>  
+                                        <p>Yang tidak termasuk cara menghubungkan virtualbox dengan jaringan internet adalah. .&nbsp; .&nbsp;</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type2" value="1">
+                                                 <input type="hidden" name="qid[2]" value="5202" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-0" class="option" value="15538" ><span id="option-15538" >A</span></label>&nbsp;<p>Memilih mode jaringan internal yang didalamnya ada koneksi internet</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-1" class="option" value="15539" ><span id="option-15539" >B</span></label>&nbsp;<p>Memilih mode NAT</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-2" class="option" value="15537" ><span id="option-15537" >C</span></label>&nbsp;<p>Memilih mode jaringan host only adapter</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[2][]"  id="answer_value2-3" class="option" value="15540" ><span id="option-15540" >D</span></label>&nbsp;<p>Memilih mode jaringan bridging</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-4" class="soal nomor-asli-4 nomor-4 ">
+                                        <div class="nomor">4</div>  
+                                        <p>Di bawah ini yang tidak termasuk dalam karakteristik sistem operasi jaringan adalah . . .&nbsp;</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type3" value="1">
+                                                 <input type="hidden" name="qid[3]" value="5198" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-0" class="option" value="15524" ><span id="option-15524" >A</span></label>&nbsp;<p>Advanced network configuration</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-1" class="option" value="15521" ><span id="option-15521" >B</span></label>&nbsp;<p>Bisa diinstall melalui flashdisk</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-2" class="option" value="15522" ><span id="option-15522" >C</span></label>&nbsp;<p>Memiliki fitur untuk keperluan jaringan atau server</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[3][]"  id="answer_value3-3" class="option" value="15523" ><span id="option-15523" >D</span></label>&nbsp;<p>Bisa digunakan untuk berbagi sumber daya</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-5" class="soal nomor-asli-5 nomor-5 ">
+                                        <div class="nomor">5</div>  
+                                        <p>Fitur atau layanan yang biasanya lazim terdapat dalam sistem operasi jaringan adalah . . .&nbsp;</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type4" value="1">
+                                                 <input type="hidden" name="qid[4]" value="5200" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-0" class="option" value="15529" ><span id="option-15529" >A</span></label>&nbsp;<p>DHCP Server</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-1" class="option" value="15532" ><span id="option-15532" >B</span></label>&nbsp;<p>Sharing</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-2" class="option" value="15530" ><span id="option-15530" >C</span></label>&nbsp;<p>User management</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[4][]"  id="answer_value4-3" class="option" value="15531" ><span id="option-15531" >D</span></label>&nbsp;<p>Setting Internet</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-6" class="soal nomor-asli-6 nomor-6 ">
+                                        <div class="nomor">6</div>  
+                                        <p>Apa yang dimaksud dengan sistem operasi closed source ?</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type5" value="1">
+                                                 <input type="hidden" name="qid[5]" value="5201" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-0" class="option" value="15534" ><span id="option-15534" >A</span></label>&nbsp;<p>Sistem operasi yang perusahaannya sudah tutup</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-1" class="option" value="15533" ><span id="option-15533" >B</span></label>&nbsp;<p>Sistem operasi yang kode sumbernya tertutup</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-2" class="option" value="15535" ><span id="option-15535" >C</span></label>&nbsp;<p>Sistem&nbsp;operasi yang sudah tidak dikembangkan lagi</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[5][]"  id="answer_value5-3" class="option" value="15536" ><span id="option-15536" >D</span></label>&nbsp;<p>Sistem operasi yang bangkrut</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-7" class="soal nomor-asli-7 nomor-7 ">
+                                        <div class="nomor">7</div>  
+                                        <p>Di bawah ini yang termasuk sistem operasi jaringan adalah</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type6" value="1">
+                                                 <input type="hidden" name="qid[6]" value="5196" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-0" class="option" value="15513" ><span id="option-15513" >A</span></label>&nbsp;<p>Windows Server</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-1" class="option" value="15514" ><span id="option-15514" >B</span></label>&nbsp;<p>Windows XP</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-2" class="option" value="15515" ><span id="option-15515" >C</span></label>&nbsp;<p>Windows 7</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[6][]"  id="answer_value6-3" class="option" value="15516" ><span id="option-15516" >D</span></label>&nbsp;<p>Windows NT</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-8" class="soal nomor-asli-8 nomor-8 ">
+                                        <div class="nomor">8</div>  
+                                        <p>Journal file yang ada di sistem adalah&nbsp; . . .&nbsp;</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type7" value="1">
+                                                 <input type="hidden" name="qid[7]" value="5199" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-0" class="option" value="15528" ><span id="option-15528" >A</span></label>&nbsp;<p>HDD</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-1" class="option" value="15526" ><span id="option-15526" >B</span></label>&nbsp;<p>NTFS</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-2" class="option" value="15527" ><span id="option-15527" >C</span></label>&nbsp;<p>FAT32</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[7][]"  id="answer_value7-3" class="option" value="15525" ><span id="option-15525" >D</span></label>&nbsp;<p>Ext4</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-9" class="soal nomor-asli-9 nomor-9 ">
+                                        <div class="nomor">9</div>  
+                                        <p>Apa yang terjadi jika perintah &quot;rm -Rf&nbsp;/home/tugas&quot; dijalankan oleh user root?</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type8" value="1">
+                                                 <input type="hidden" name="qid[8]" value="5208" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[8][]"  id="answer_value8-0" class="option" value="15561" ><span id="option-15561" >A</span></label>&nbsp;<p>Menghapus keseluruhan folder tugas</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[8][]"  id="answer_value8-1" class="option" value="15564" ><span id="option-15564" >B</span></label>&nbsp;<p>Membuat folder tugas</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[8][]"  id="answer_value8-2" class="option" value="15563" ><span id="option-15563" >C</span></label>&nbsp;<p>Memindahkan folder home ke folder tugas</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[8][]"  id="answer_value8-3" class="option" value="15562" ><span id="option-15562" >D</span></label>&nbsp;<p>Menghapus folder home</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                        <div id="nomor-asli-10" class="soal nomor-asli-10 nomor-10 ">
+                                        <div class="nomor">10</div> 
+                                        <p>Kapan kita menggunakan fasilitas remote server ?</p>
+                                        <div class="options-group">
+                                                                                            <input type="hidden"  name="question_type[]"  id="q_type9" value="1">
+                                                 <input type="hidden" name="qid[9]" value="5210" id="qid">
+                                               
+                                                                                                        <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[9][]"  id="answer_value9-0" class="option" value="15570" ><span id="option-15570" >A</span></label>&nbsp;<p>Ketika server tidak terhubung</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[9][]"  id="answer_value9-1" class="option" value="15569" ><span id="option-15569" >B</span></label>&nbsp;<p>Ketika tidak bisa menjangkau server secara fisik</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[9][]"  id="answer_value9-2" class="option" value="15571" ><span id="option-15571" >C</span></label>&nbsp;<p>Ketika server error</p>
+                                                                                                                    </div>
+                                                                                                                <div class="options"><label class="coolbox">
+                                                                <input type="radio" name="answer[9][]"  id="answer_value9-3" class="option" value="15572" ><span id="option-15572" >D</span></label>&nbsp;<p>Ketika mengakses server cadangan</p>
+                                                                                                                    </div>
+                                                                        
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                        <div id="soal-foot">
+                            <table width="100%">
+                                <tbody><tr>
+                                        <td align="left"><button type="button" id="prev-soal" class="btn btn-default"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> SOAL SEBELUMNYA</button></td>
+                                        <td align="center"><button type="button" class="btn btn-warning ragu"><span class="glyphicon glyphicon-unchecked ragu-1 ragu-check" aria-hidden="true"></span> RAGU - RAGU</button></td>
+                                        <td align="right"><button type="button" id="next-soal" class="btn btn-primary">SOAL BERIKUTNYA <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+                                        <td align="right"><button style="display:none" type="button" data-toggle="modal" data-target="#myModal" id="last-soal" class="btn btn-primary">KUMPULKAN JAWABAN<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+                                    </tr>
+                                </tbody></table>
+                                <!-- <table width="100%">
+                                        <tbody><tr>
+                                                <td align="left"><button type="button" id="prev-soal" class="btn btn-default"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> SOAL SEBELUMNYA</button></td>
+                                                <td align="center"><button type="button" class="btn btn-warning ragu"><span class="glyphicon glyphicon-unchecked ragu-1 ragu-check" aria-hidden="true"></span> RAGU - RAGU</button></td>
+                                                <td align="right"><button type="button" id="next-soal" class="btn btn-primary" onClick="javascript:show_next_question();">SOAL BERIKUTNYA <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+                                                <td align="right"><button style="display:none" type="button" data-toggle="modal" data-target="#myModal" id="last-soal" class="btn btn-primary">KUMPULKAN JAWABAN<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+                                                <button class="btn btn-danger"  onClick="javascript:cancelmove();" style="margin-top:2px;" >Kirim Jawaban</button>
+                                        </tr>
+                                </tbody></table> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="right: 0px;" id="summary-button" class="">
+            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-menu-left" aria-hidden="true" style="position:relative; top:10px"></span> Daftar <br>Soal</button>
+        </div>
+
+        <div style="display: none;" id="summary">
+                <div class="no nomor-asli-1 no-1 active" id="qbtn1">
+                    <p>1</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('0');" id="qbtn0" ></div> -->
+                    <div class="no nomor-asli-2 no-2 " id="qbtn2">
+                    <p>2</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('1');" id="qbtn1" ></div> -->
+                    <div class="no nomor-asli-3 no-3 " id="qbtn3">
+                    <p>3</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('2');" id="qbtn2" ></div> -->
+                    <div class="no nomor-asli-4 no-4 " id="qbtn4">
+                    <p>4</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('3');" id="qbtn3" ></div> -->
+                    <div class="no nomor-asli-5 no-5 " id="qbtn5">
+                    <p>5</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('4');" id="qbtn4" ></div> -->
+                    <div class="no nomor-asli-6 no-6 " id="qbtn6">
+                    <p>6</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('5');" id="qbtn5" ></div> -->
+                    <div class="no nomor-asli-7 no-7 " id="qbtn7">
+                    <p>7</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('6');" id="qbtn6" ></div> -->
+                    <div class="no nomor-asli-8 no-8 " id="qbtn8">
+                    <p>8</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('7');" id="qbtn7" ></div> -->
+                    <div class="no nomor-asli-9 no-9 " id="qbtn9">
+                    <p>9</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('8');" id="qbtn8" ></div> -->
+                    <div class="no nomor-asli-10 no-10 " id="qbtn10">
+                    <p>10</p>
+                    <span></span>
+                </div>
+                <!-- <div class="qbtn" onClick="javascript:show_question('9');" id="qbtn9" ></div> -->
+            </div>
+        <div id="jumlah_soal" style="display:none">10</div> 
+        <script>
+            $(document).ready(function () {
+                $('#finish').text('11 January 2016 17:00:00');
+                $('#last-soal').click(function () {
+                    if ($('.not-done').length > 0) {
+                        $('#ragu-modal').show();
+                    } else {
+                        if ($('.ragu-ragu').length > 0) {
+                            $('#ragu-modal').show();
+                        } else {
+                            $('#yakin-modal').show();
+                        }
+                    }
+                })
+            });
+        </script>
+        <script>
+            var ctime = 0;
+            var ind_time = new Array();
+                ind_time[0] =60;
+                    ind_time[1] =0;
+                    ind_time[2] =0;
+                    ind_time[3] =0;
+                    ind_time[4] =0;
+                    ind_time[5] =0;
+                    ind_time[6] =0;
+                    ind_time[7] =0;
+                    ind_time[8] =0;
+                    ind_time[9] =0;
+                noq = "10";
+            //show_question('0');
+
+
+            function increasectime() {
+
+                ctime += 1;
+
+            }
+            setInterval(increasectime, 1000);
+            setInterval(setIndividual_time, 30000);
+            setInterval(save_time, 10000);
+            
+
+
+        </script>           
+
+
+    </body><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>
